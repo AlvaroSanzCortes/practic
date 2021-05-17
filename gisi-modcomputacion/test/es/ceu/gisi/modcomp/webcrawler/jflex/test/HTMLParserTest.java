@@ -49,7 +49,7 @@ public class HTMLParserTest {
     /**
      * El test comprueba que el analizador léxico reconoce los tres primeros
      * tokens de un fichero HTML y que corresponden con "<HTML>".
-     */
+     */  
     @Test
     public void compruebaEtiquetaInicioHTML() {
         try {

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.io.IOException;
 
 /**
  * Esta clase encapsula toda la lógica de interacción con el parser HTML.
@@ -16,7 +17,7 @@ public class JFlexScraper {
 
     HTMLParser analizador;
 
-    public JFlexScraper(File fichero) throws FileNotFoundException {
+    public JFlexScraper(File fichero) throws FileNotFoundException, IOException {
         Reader reader = new BufferedReader(new FileReader(fichero));
         analizador = new HTMLParser(reader);
     }
