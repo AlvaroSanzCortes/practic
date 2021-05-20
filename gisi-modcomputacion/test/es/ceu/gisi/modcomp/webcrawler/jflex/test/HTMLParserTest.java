@@ -56,9 +56,9 @@ public class HTMLParserTest {
             Token token1 = analizador.nextToken();
             Token token2 = analizador.nextToken();
             Token token3 = analizador.nextToken();
-            assertEquals(token1.getTipo(), Tipo.OPEN);
-            assertEquals(token2.getValor().toLowerCase(), "html");
-            assertEquals(token3.getTipo(), Tipo.CLOSE);
+            assertEquals(token1.getTipo(), Tipo.OPEN);//<
+            assertEquals(token2.getValor().toLowerCase(), "html");//html
+            assertEquals(token3.getTipo(), Tipo.CLOSE);//>
         } catch (IOException ex) {
             Logger.getLogger(HTMLParserTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -66,29 +66,29 @@ public class HTMLParserTest {
 
     /**
      * El test comprueba que el analizador léxico reconoce los tres primeros
-     * tokens de un fichero HTML y que corresponden con "<HTML>".
+     * tokens de un fichero HTML y que corresponden con "</HTML>"
      */
     @Test
     public void compruebaInicioYFinEtiquetaHTML() {
         try {
-            analizador.yyreset(reader1);
+            analizador.yyreset(reader2);
             //El inicio de una etiqueta HTML es: <NOMBREETIQUETA>
             Token token1 = analizador.nextToken();
             Token token2 = analizador.nextToken();
             Token token3 = analizador.nextToken();
-            assertEquals(token1.getTipo(), Tipo.OPEN);
-            assertEquals(token2.getValor().toLowerCase(), "html");
-            assertEquals(token3.getTipo(), Tipo.CLOSE);
+            assertEquals(token1.getTipo(), Tipo.OPEN);//<
+            assertEquals(token2.getValor().toLowerCase(), "html"); //html
+            assertEquals(token3.getTipo(), Tipo.CLOSE);//>
 
             // El final de una etiqueta HTML es: </NOMBREETIQUETA>
             Token token4 = analizador.nextToken();
             Token token5 = analizador.nextToken();
             Token token6 = analizador.nextToken();
             Token token7 = analizador.nextToken();
-            assertEquals(token4.getTipo(), Tipo.OPEN);
-            assertEquals(token5.getTipo(), Tipo.SLASH);
-            assertEquals(token6.getValor().toLowerCase(), "html");
-            assertEquals(token7.getTipo(), Tipo.CLOSE);
+            assertEquals(token4.getTipo(), Tipo.OPEN);//<
+            assertEquals(token5.getTipo(), Tipo.SLASH);// /
+            assertEquals(token6.getValor().toLowerCase(), "html");//html
+            assertEquals(token7.getTipo(), Tipo.CLOSE);//>
         } catch (IOException ex) {
             Logger.getLogger(HTMLParserTest.class.getName()).log(Level.SEVERE, null, ex);
             assertTrue(false);
@@ -102,7 +102,7 @@ public class HTMLParserTest {
     @Test
     public void compruebaInicioYFinEtiquetaBR() {
         try {
-            analizador.yyreset(reader2);
+            analizador.yyreset(reader1);
             //Una etiqueta BR tiene la forma: <BR /> (incluye inicio y fin de etiqueta)
             boolean encontradoBR = false;
             while (!encontradoBR) {
