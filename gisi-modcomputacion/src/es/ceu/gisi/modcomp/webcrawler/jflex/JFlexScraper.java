@@ -21,6 +21,7 @@ public class JFlexScraper {
     HTMLParser analizador;
 
     ArrayList<String> enlacesA = new ArrayList<>();
+    Stack<String> etiquetasAbiertas = new Stack();
     
     public JFlexScraper(File fichero) throws FileNotFoundException, IOException {
         Reader reader = new BufferedReader(new FileReader(fichero));
@@ -28,6 +29,10 @@ public class JFlexScraper {
         
         int estado = 0;
         Token tk = analizador.nextToken();
+        boolean etiquetaA = false;
+        boolean etiquetaIMG = false;
+        boolean valorHREF = false;
+        
         
         while ( tk != null){
             switch(estado){
@@ -37,6 +42,24 @@ public class JFlexScraper {
                         estado = 1;
                     }
                     break;
+                
+                case 1:
+                    //Estamos en el estado 1
+                    //En este estado estamos si hemos leido un OPEN <
+                    if(tk.getTipo()==Tipo.PALABRA){
+                        estado = 2;
+                        etiquetasAbiertas.push(tk.getValor().toLowerCase());
+                        
+                        if(tk.getValor().equalsIgnoreCase("a")){ //<A
+                            etiquetaA = true;
+                        }else if(tk.getValor().equalsIgnoreCase("img")){ //<IMG
+                            etiquetaIMG = true;
+                        }
+                    }else if(tk.getTipo() == Tipo.SLASH){ //</
+                        estado = 6;
+                    }
+                    break;
+                
             }
         }
     }
