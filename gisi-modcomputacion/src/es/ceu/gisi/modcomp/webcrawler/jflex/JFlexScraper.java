@@ -97,8 +97,8 @@ public class JFlexScraper {
                         }
                         if(valorSRC){
                             enlacesIMG.add(tk.getValor());
-                        estado = 2;
                         }
+                        estado = 2;
                     }
                     break;
                 case 5:
@@ -106,6 +106,18 @@ public class JFlexScraper {
                     //Se cierran las palabras con atributos
                     if(tk.getTipo() == Tipo.CLOSE){ 
                         bienBalanceado = true;
+                    }
+                    break;
+                case 6:
+                    //Estando en el estado 6
+                    //Se añaden las palabras tras un SLASH del estado 1
+                    if(tk.getTipo()==Tipo.PALABRA){
+                        if(tk.getValor().equalsIgnoreCase(etiquetasAbiertas.peek())){
+                            etiquetasAbiertas.pop();
+                            estado = 7;
+                        }else {
+                           bienBalanceado = false;
+                        }
                     }
                     break;
             }
