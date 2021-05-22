@@ -22,6 +22,7 @@ public class JFlexScraper {
 
     ArrayList<String> enlacesA = new ArrayList<>();
     Stack<String> etiquetasAbiertas = new Stack();
+    ArrayList<String> enlacesIMG = new ArrayList<>();
     
     public JFlexScraper(File fichero) throws FileNotFoundException, IOException {
         Reader reader = new BufferedReader(new FileReader(fichero));
@@ -82,8 +83,22 @@ public class JFlexScraper {
                     break;
                 case 3:
                     //Estando en el estado 3
-                    if(tk.getTipo()==Tipo.IGUAL){ // <A heref=   // <IMG src=
+                    //Ahora debemos leer "="
+                    if(tk.getTipo()==Tipo.IGUAL){ // <A href=   // <IMG src=
                         estado = 4;
+                    }
+                    break;
+                case 4:
+                    //Estando en el estado 4
+                    //Esto es un valor de un atributo
+                    if(tk.getTipo() == Tipo.VALOR){
+                        if(valorHREF){
+                            enlacesA.add(tk.getValor()); //<A href= enlace
+                        }
+                        if(valorSRC){
+                            enlacesIMG.add(tk.getValor());//<IMG src= enlace
+                        }
+                        estado = 2;
                     }
                     break;
             }
