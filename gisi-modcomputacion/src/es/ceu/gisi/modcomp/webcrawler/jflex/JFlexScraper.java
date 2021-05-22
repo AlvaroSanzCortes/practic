@@ -35,6 +35,7 @@ public class JFlexScraper {
         boolean valorHREF = false;
         boolean valorSRC = false;
         boolean bienBalanceado = false;
+        boolean malBalanceado = false;
         
         
         while ( tk != null){
@@ -48,7 +49,7 @@ public class JFlexScraper {
                 case 1:
                     //Estamos en el estado 1
                     //En este estado estamos si hemos leido un OPEN <
-                    if(tk.getTipo()==Tipo.PALABRA){
+                    if(tk.getTipo()== Tipo.PALABRA){
                         estado = 2;
                         etiquetasAbiertas.push(tk.getValor().toLowerCase());                       
                         
@@ -106,20 +107,28 @@ public class JFlexScraper {
                     //Se cierran las palabras con atributos
                     if(tk.getTipo() == Tipo.CLOSE){ 
                         bienBalanceado = true;
+                    }else {
+                        malBalanceado = true;
                     }
                     break;
                 case 6:
                     //Estando en el estado 6
                     //Se añaden las palabras tras un SLASH del estado 1
-                    if(tk.getTipo()==Tipo.PALABRA){
+                    if(tk.getTipo()== Tipo.PALABRA){
                         if(tk.getValor().equalsIgnoreCase(etiquetasAbiertas.peek())){
                             etiquetasAbiertas.pop();
                             estado = 7;
                         }else {
-                           bienBalanceado = false;
+                           malBalanceado = true;
                         }
                     }
                     break;
+                case 7:
+                    //Estando en el estado 7
+                    //Se cierran las palabras
+                    if(tk.getTipo() == Tipo.CLOSE){
+                        bienBalanceado = true;
+                    }
             }
             tk = analizador.nextToken();
         }
