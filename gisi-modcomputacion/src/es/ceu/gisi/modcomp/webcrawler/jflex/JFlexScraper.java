@@ -61,11 +61,12 @@ public class JFlexScraper {
                     }
                     break;
                 case 2:
+                    //Estando en el estado 2
                     //Ahora debemos leer att=valor o fin de etiqueta
                     if(tk.getTipo() == Tipo.PALABRA){
                         estado = 3;
                         if(etiquetaA){
-                            if(tk.getValor().equalsIgnoreCase("href")){ // < A href
+                            if(tk.getValor().equalsIgnoreCase("href")){ // <A href
                                 valorHREF = true;
                             }
                         }else if(etiquetaIMG){
@@ -78,6 +79,12 @@ public class JFlexScraper {
                     }else if(tk.getTipo() == Tipo.SLASH){ // <palabra/
                         estado = 5;
                     }                 
+                    break;
+                case 3:
+                    //Estando en el estado 3
+                    if(tk.getTipo()==Tipo.IGUAL){ // <A heref=   // <IMG src=
+                        estado = 4;
+                    }
                     break;
             }
             tk = analizador.nextToken();
