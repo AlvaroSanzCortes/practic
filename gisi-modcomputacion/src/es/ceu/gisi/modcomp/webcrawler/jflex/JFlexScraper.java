@@ -32,23 +32,24 @@ public class JFlexScraper {
         boolean etiquetaA = false;
         boolean etiquetaIMG = false;
         boolean valorHREF = false;
+        boolean valorSRC = false;
+        boolean bienBalanceado = false;
         
         
         while ( tk != null){
             switch(estado){
                 case 0:
                     //Estando en el estado 0 
-                    if(tk.getTipo()== Tipo.OPEN) {
+                    if(tk.getTipo()== Tipo.OPEN) { // <
                         estado = 1;
                     }
-                    break;
-                
+                    break;                
                 case 1:
                     //Estamos en el estado 1
                     //En este estado estamos si hemos leido un OPEN <
                     if(tk.getTipo()==Tipo.PALABRA){
                         estado = 2;
-                        etiquetasAbiertas.push(tk.getValor().toLowerCase());
+                        etiquetasAbiertas.push(tk.getValor().toLowerCase());                       
                         
                         if(tk.getValor().equalsIgnoreCase("a")){ //<A
                             etiquetaA = true;
@@ -59,8 +60,27 @@ public class JFlexScraper {
                         estado = 6;
                     }
                     break;
-                
+                case 2:
+                    //Ahora debemos leer att=valor o fin de etiqueta
+                    if(tk.getTipo() == Tipo.PALABRA){
+                        estado = 3;
+                        if(etiquetaA){
+                            if(tk.getValor().equalsIgnoreCase("href")){ // < A href
+                                valorHREF = true;
+                            }
+                        }else if(etiquetaIMG){
+                            if (tk.getValor().equalsIgnoreCase("src")){ //<IMG src 
+                                valorSRC = true;
+                            }
+                        }
+                    }if (tk.getTipo() == Tipo.CLOSE){ // <palabra>
+                        bienBalanceado = true;
+                    }else if(tk.getTipo() == Tipo.SLASH){ // <palabra/
+                        estado = 5;
+                    }                 
+                    break;
             }
+            tk = analizador.nextToken();
         }
     }
 
