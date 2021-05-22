@@ -52,12 +52,12 @@ public class JFlexScraper {
                         estado = 2;
                         etiquetasAbiertas.push(tk.getValor().toLowerCase());                       
                         
-                        if(tk.getValor().equalsIgnoreCase("a")){ //<A
+                        if(tk.getValor().equalsIgnoreCase("a")){
                             etiquetaA = true;
-                        }else if(tk.getValor().equalsIgnoreCase("img")){ //<IMG
+                        }else if(tk.getValor().equalsIgnoreCase("img")){
                             etiquetaIMG = true;
                         }
-                    }else if(tk.getTipo() == Tipo.SLASH){ //</
+                    }else if(tk.getTipo() == Tipo.SLASH){ 
                         estado = 6;
                     }
                     break;
@@ -67,24 +67,24 @@ public class JFlexScraper {
                     if(tk.getTipo() == Tipo.PALABRA){
                         estado = 3;
                         if(etiquetaA){
-                            if(tk.getValor().equalsIgnoreCase("href")){ // <A href
+                            if(tk.getValor().equalsIgnoreCase("href")){ 
                                 valorHREF = true;
                             }
                         }else if(etiquetaIMG){
-                            if (tk.getValor().equalsIgnoreCase("src")){ //<IMG src 
+                            if (tk.getValor().equalsIgnoreCase("src")){
                                 valorSRC = true;
                             }
                         }
-                    }if (tk.getTipo() == Tipo.CLOSE){ // <palabra>
+                    }if (tk.getTipo() == Tipo.CLOSE){ 
                         bienBalanceado = true;
-                    }else if(tk.getTipo() == Tipo.SLASH){ // <palabra/
+                    }else if(tk.getTipo() == Tipo.SLASH){ 
                         estado = 5;
                     }                 
                     break;
                 case 3:
                     //Estando en el estado 3
                     //Ahora debemos leer "="
-                    if(tk.getTipo()==Tipo.IGUAL){ // <A href=   // <IMG src=
+                    if(tk.getTipo()==Tipo.IGUAL){ 
                         estado = 4;
                     }
                     break;
@@ -93,12 +93,19 @@ public class JFlexScraper {
                     //Esto es un valor de un atributo
                     if(tk.getTipo() == Tipo.VALOR){
                         if(valorHREF){
-                            enlacesA.add(tk.getValor()); //<A href= enlace
+                            enlacesA.add(tk.getValor()); 
                         }
                         if(valorSRC){
-                            enlacesIMG.add(tk.getValor());//<IMG src= enlace
-                        }
+                            enlacesIMG.add(tk.getValor());
                         estado = 2;
+                        }
+                    }
+                    break;
+                case 5:
+                    //Estando en el estado 5
+                    //Se cierran las palabras con atributos
+                    if(tk.getTipo() == Tipo.CLOSE){ 
+                        bienBalanceado = true;
                     }
                     break;
             }
