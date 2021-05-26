@@ -13,7 +13,7 @@ public class WebCrawler {
         // Y creará un fichero con todos los hiperenlaces que encuentre.
         // También deberá indicar, mediante un mensaje en pantalla que
         // el fichero HTML que se ha pasado está bien balanceado.
-
+        
         // Deberá inicializar JsoupScraper con la DIRECCIÓN HTTP de una página
         // web a analizar. Creará un fichero con todos los hiperenlaces que
         // encuentre en la página web. También obtendrá estadísticas de uso 

@@ -5,13 +5,17 @@
  */
 package es.ceu.gisi.modcomp.webcrawler.jsoup;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+
 
 /**
  * Esta clase encapsula toda la lógica de interacción con el analizador Jsoup.
@@ -20,8 +24,8 @@ import org.jsoup.nodes.Element;
  */
 public class JsoupScraper {
 
-    private final Document doc;
-
+    private Document doc;
+     
     /**
      * Este constructor crea un documento a partir de la URL de la página web a
      * analizar.
@@ -32,7 +36,12 @@ public class JsoupScraper {
     public JsoupScraper(URL url) throws IOException {
         // La variable deberá inicializarse de alguna manera utilizando una URL...
         // De momento, se inicializa a null para que compile...
-        doc = null;
+        try{
+            URL url1 = new URL("http://www.servidor.com/index.html");
+            doc = Jsoup.connect(url1.toString()).get();
+        }catch(IOException e){
+            System.out.println(e);
+        }
     }
 
     /**

@@ -36,7 +36,7 @@ public class JFlexScraper {
         boolean valorSRC = false;
         boolean bienBalanceado = false;
         boolean malBalanceado = false;
-        
+                
         
         while ( tk != null){
             switch(estado){
@@ -134,19 +134,16 @@ public class JFlexScraper {
         }
     }
 
-    // Esta clase debe contener tu automata programado...
-    public ArrayList<String> obtenerHiperenlaces() {
-        // Habrá que programarlo..
-        return new ArrayList<String>();
+    
+    public ArrayList<String> obtenerHiperenlaces(){     
+        return enlacesA;
     }
 
     public ArrayList<String> obtenerHiperenlacesImagenes() {
-        // Habrá que programarlo..
-        return new ArrayList<String>();
+        return enlacesIMG;
     }
-
+    
     public boolean esDocumentoHTMLBienBalanceado() {
-        // Habrá que programarlo..
         return false;
     }
 }
