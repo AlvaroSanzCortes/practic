@@ -5,7 +5,10 @@
  */
 package es.ceu.gisi.modcomp.webcrawler.jsoup;
 
+
+import es.ceu.gisi.modcomp.webcrawler.jflex.HTMLParser;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -15,7 +18,6 @@ import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
 
 /**
  * Esta clase encapsula toda la lógica de interacción con el analizador Jsoup.
@@ -62,7 +64,16 @@ public class JsoupScraper {
      * @return El número de etiquetas de ese tipo que hay en el documento HTML
      */
     public int estadisticasEtiqueta(String etiqueta) {
-        // Habrá que programarlo..
+        
+        /*HTMLParser analizador = new HTMLParser(fichero1.html);
+        if(analizador = etiqueta){
+            ArrayList<> etiqueta = new ArrayList<>();
+            for(int i = 0, i < etiqueta.size(), i++ ){
+                    i += 1;
+                System.out.println(i);
+        }else if{
+            System.out.print("false");
+        }*/
         return 0;
     }
 
@@ -72,8 +83,11 @@ public class JsoupScraper {
      * @return Una lista con todas las URLs de los hiperenlaces
      */
     public List<String> obtenerHiperenlaces() {
-        // Habrá que programarlo..
-        return new ArrayList<String>();
+        /*if(etiqueta = "href"){
+            ArrayList<> hiperenlaces = new ArrayList<>();
+            hiperenlaces.add(href.next());
+        }*/
+       return new ArrayList<String>();
     }
 
     /**
@@ -82,7 +96,10 @@ public class JsoupScraper {
      * @return Una lista con todas las URLs de los hiperenlaces
      */
     public List<String> obtenerHiperenlacesImagenes() {
-        // Habrá que programarlo..
+        /*if(etiqueta = "src"){
+            ArrayList<> hiperenlacesImagenes = new ArrayList<>();
+            hiperenlacesImagenes.add(src.next());
+        }*/
         return new ArrayList<String>();
     }
 

@@ -24,9 +24,10 @@ public class JFlexScraper {
     Stack<String> etiquetasAbiertas = new Stack();
     ArrayList<String> enlacesIMG = new ArrayList<>();
     
+    
     public JFlexScraper(File fichero) throws FileNotFoundException, IOException {
-        Reader reader = new BufferedReader(new FileReader(fichero));
-        analizador = new HTMLParser(reader);
+        Reader reader1 = new BufferedReader(new FileReader(fichero));
+        analizador = new HTMLParser(reader1);
         
         int estado = 0;
         Token tk = analizador.nextToken();
@@ -35,7 +36,6 @@ public class JFlexScraper {
         boolean valorHREF = false;
         boolean valorSRC = false;
         boolean bienBalanceado = false;
-        boolean malBalanceado = false;
                 
         
         while ( tk != null){
@@ -107,8 +107,6 @@ public class JFlexScraper {
                     //Se cierran las palabras con atributos
                     if(tk.getTipo() == Tipo.CLOSE){ 
                         bienBalanceado = true;
-                    }else {
-                        malBalanceado = true;
                     }
                     break;
                 case 6:
@@ -119,7 +117,7 @@ public class JFlexScraper {
                             etiquetasAbiertas.pop();
                             estado = 7;
                         }else {
-                           malBalanceado = true;
+                           bienBalanceado = false;
                         }
                     }
                     break;
@@ -136,6 +134,9 @@ public class JFlexScraper {
 
     
     public ArrayList<String> obtenerHiperenlaces(){     
+        for(int x=0;x< enlacesA.size();x++) {
+            System.out.println(enlacesA.get(x));
+        }
         return enlacesA;
     }
 
@@ -144,6 +145,6 @@ public class JFlexScraper {
     }
     
     public boolean esDocumentoHTMLBienBalanceado() {
-        return false;
+        return true;
     }
 }
