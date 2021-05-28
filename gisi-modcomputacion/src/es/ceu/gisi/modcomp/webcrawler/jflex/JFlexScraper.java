@@ -14,7 +14,7 @@ import java.util.Stack;
 /**
  * Esta clase encapsula toda la lógica de interacción con el parser HTML.
  *
- * @author Sergio Saugar García <sergio.saugargarcia@ceu.es>
+ * @author Alvaro Sanz
  */
 public class JFlexScraper {
     

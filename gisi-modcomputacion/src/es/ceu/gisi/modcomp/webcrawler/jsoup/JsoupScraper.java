@@ -6,12 +6,7 @@
 package es.ceu.gisi.modcomp.webcrawler.jsoup;
 
 
-import es.ceu.gisi.modcomp.webcrawler.jflex.HTMLParser;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +17,7 @@ import org.jsoup.nodes.Element;
 /**
  * Esta clase encapsula toda la lógica de interacción con el analizador Jsoup.
  *
- * @author Sergio Saugar García <sergio.saugargarcia@ceu.es>
+ * @author Alvaro Sanz
  */
 public class JsoupScraper {
 

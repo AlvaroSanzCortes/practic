@@ -9,7 +9,7 @@ import es.ceu.gisi.modcomp.webcrawler.jsoup.JsoupScraper;
  * Esta aplicación contiene el programa principal que ejecuta ambas partes del
  * proyecto de programación.
  *
- * @author Sergio Saugar García <sergio.saugargarcia@ceu.es>
+ * @author Alvaro Sanz
  */
 public class WebCrawler {
     
